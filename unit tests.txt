@@ -1,0 +1,35 @@
+import FileBasedDataStore as z
+
+z.initialise("C:/Users/Public/data.json")
+#initialising user defined path
+
+z.create("name","Sierra")
+#to create a key with key_name,value given and with no time-to-live property
+
+z.create("src",70,timeout = 3600) 
+#to create a key with key_name,value given and with time-to-live property value given(number of seconds)
+
+z.create("adkfjasdlkfjalskdfjoiehrasldflkasjdfksadjflkgsadlkfjaslkdfafdslkejwohrsadf","cse",timeout = 1600)
+#it returns an ERROR since the key limit is exceed 32char
+
+z.read("name")
+#it returns the value of the respective key in Jason object format 'key:value' if timeout is not expired
+
+z.read("src")
+#it returns the value of the respective key in Jason object format if its timeout is not expired
+
+z.create("name","alpha")
+#it returns an ERROR since the key already exists in the database
+
+z.delete("src")
+#it deletes the respective key from the json file
+
+z.delete("name")
+#it returns ERROR since the time-to-live has expired
+
+z.delete("rsse")
+#it returns ERROR since the key is not in the json file
+
+#threading concept
+thred = threading.Thread(target=create,args=(key,value,timeout)) 
+thred.start()
